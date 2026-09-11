@@ -1,22 +1,28 @@
 import logging
 import os
 
-os.makedirs('login', exist_ok=True)
+# Get the folder where this Python file is located
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Create logs folder INSIDE the login folder
+log_dir = os.path.join(base_dir, 'login')
+os.makedirs(log_dir, exist_ok=True)
+
+# Log file path
+log_file = os.path.join(log_dir, 'app1.log')
 
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s-%(name)s-%(levelname)s-%(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     handlers=[
-        logging.FileHandler('login/app1.log'),
+        logging.FileHandler(log_file),
         logging.StreamHandler()
     ],
     force=True
 )
 
-
 logger = logging.getLogger('Arithmetic App')
-
 
 def add(a,b):
     result = a+b
